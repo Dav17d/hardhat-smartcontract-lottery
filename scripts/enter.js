@@ -3,7 +3,7 @@ const { ethers } = require("hardhat")
 async function enterRaffle() {
     const raffle = await ethers.getContract("Raffle")
     const entranceFee = await raffle.getEntranceFee()
-    await raffle.enterRaffle({ value: entranceFee + 1 })
+    const tx = await raffle.enterRaffle({ value: entranceFee })
     console.log(tx.hash)
     console.log("Entered!")
 }

@@ -7,8 +7,8 @@ const FRONT_END_ABI_FILE = "../nextjs-smartcontract-lottery/constants/abi.json"
 module.exports = async function () {
     if (process.env.UPDATE_FRONT_END) {
         console.log("Updating front end...")
-        updateContractAddresses()
-        updateAbi()
+        await updateContractAddresses()
+        await updateAbi()
     }
 }
 
@@ -21,6 +21,7 @@ async function updateContractAddresses() {
     const raffle = await ethers.getContract("Raffle")
     const chainId = network.config.chainId.toString()
     const currentAddresses = JSON.parse(fs.readFileSync(FRONT_END_ADDRESSES_FILE, "utf8"))
+    console.log(chainId)
     if (chainId in currentAddresses) {
         if (!currentAddresses[chainId].includes(raffle.address)) {
             currentAddresses[chainId].push(raffle.address)
