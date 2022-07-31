@@ -21,7 +21,6 @@ async function updateContractAddresses() {
     const raffle = await ethers.getContract("Raffle")
     const chainId = network.config.chainId.toString()
     const currentAddresses = JSON.parse(fs.readFileSync(FRONT_END_ADDRESSES_FILE, "utf8"))
-    console.log(chainId)
     if (chainId in currentAddresses) {
         if (!currentAddresses[chainId].includes(raffle.address)) {
             currentAddresses[chainId].push(raffle.address)
